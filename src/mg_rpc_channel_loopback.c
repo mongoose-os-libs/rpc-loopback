@@ -6,13 +6,11 @@
 #include <stdlib.h>
 
 #include "mg_rpc_channel_loopback.h"
+#include "mg_rpc.h"
+#include "mg_rpc_channel.h"
+#include "mgos_rpc.h"
 
-#include "common/mg_rpc/mg_rpc_channel.h"
-#include "common/mg_rpc/mg_rpc.h"
 #include "fw/src/mgos_hal.h"
-#include "fw/src/mgos_rpc.h"
-
-#if MGOS_ENABLE_RPC
 
 /*
  * mgos_invoke_cb callback which emits OPEN event to mg_rpc
@@ -114,5 +112,3 @@ bool mgos_rpc_loopback_init(void) {
   lch->ch_connect(lch);
   return true;
 }
-
-#endif /* MGOS_ENABLE_RPC */
