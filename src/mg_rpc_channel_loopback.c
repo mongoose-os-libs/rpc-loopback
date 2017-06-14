@@ -108,7 +108,8 @@ struct mg_rpc_channel *mg_rpc_channel_loopback(void) {
 
 bool mgos_rpc_loopback_init(void) {
   struct mg_rpc_channel *lch = mg_rpc_channel_loopback();
-  mg_rpc_add_channel(mgos_rpc_get_global(), mg_mk_str("RPC.LOCAL"), lch, true /* is_trusted */);
+  mg_rpc_add_channel(mgos_rpc_get_global(), mg_mk_str("RPC.LOCAL"), lch,
+                     true /* is_trusted */);
   lch->ch_connect(lch);
   return true;
 }
