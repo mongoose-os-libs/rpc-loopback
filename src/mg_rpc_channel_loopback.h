@@ -10,6 +10,8 @@
 
 #include "mongoose/mongoose.h"
 
+#define MGOS_RPC_LOOPBACK_ADDR "RPC.LOCAL"
+
 /*
  * Creates a new loopback channel. Should be called for each incoming loopback
  * request; `nc` is an incoming connection.

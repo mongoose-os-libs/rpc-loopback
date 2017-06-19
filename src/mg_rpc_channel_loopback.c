@@ -46,6 +46,11 @@ static const char *mg_rpc_channel_loopback_get_type(struct mg_rpc_channel *ch) {
   return "loopback";
 }
 
+static char *mg_rpc_channel_loopback_get_info(struct mg_rpc_channel *ch) {
+  (void) ch;
+  return NULL;
+}
+
 /*
  * mgos_invoke_cb callback which emits SENT and RECD_PARSED events to mg_rpc.
  */
@@ -57,10 +62,8 @@ static void cb_sent_recd(void *param) {
   ch->ev_handler(ch, MG_RPC_CHANNEL_FRAME_SENT, (void *) 1);
 
   if (mg_rpc_parse_frame(mg_mk_str(fbuf), &frame)) {
-    struct mg_str buf = frame.src;
-    frame.src = frame.dst;
-    frame.dst = buf;
-
+    frame.src = mg_mk_str(MGOS_RPC_LOOPBACK_ADDR);
+    frame.dst.len = 0; /* Implied destination. */
     ch->ev_handler(ch, MG_RPC_CHANNEL_FRAME_RECD_PARSED, (void *) &frame);
   }
 
@@ -85,6 +88,8 @@ static bool mg_rpc_channel_loopback_send_frame(struct mg_rpc_channel *ch,
    */
 
   char *fbuf = malloc(f.len + 1 /* null-terminate */);
+  if (fbuf == NULL) return false;
+
   memcpy(fbuf, f.p, f.len);
   fbuf[f.len] = '\0';
   ch->user_data = fbuf;
@@ -101,15 +106,15 @@ struct mg_rpc_channel *mg_rpc_channel_loopback(void) {
   ch->ch_close = mg_rpc_channel_loopback_ch_close;
   ch->ch_destroy = mg_rpc_channel_loopback_ch_destroy;
   ch->get_type = mg_rpc_channel_loopback_get_type;
+  ch->get_info = mg_rpc_channel_loopback_get_info;
   ch->is_persistent = mg_rpc_channel_loopback_is_persistent;
-
   return ch;
 }
 
 bool mgos_rpc_loopback_init(void) {
   struct mg_rpc_channel *lch = mg_rpc_channel_loopback();
-  mg_rpc_add_channel(mgos_rpc_get_global(), mg_mk_str("RPC.LOCAL"), lch,
-                     true /* is_trusted */);
+  mg_rpc_add_channel(mgos_rpc_get_global(), mg_mk_str(MGOS_RPC_LOOPBACK_ADDR),
+                     lch, true /* is_trusted */);
   lch->ch_connect(lch);
   return true;
 }
