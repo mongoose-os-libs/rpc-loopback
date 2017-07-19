@@ -10,7 +10,7 @@
 #include "mg_rpc_channel.h"
 #include "mgos_rpc.h"
 
-#include "fw/src/mgos_hal.h"
+#include "mgos_hal.h"
 
 /*
  * mgos_invoke_cb callback which emits OPEN event to mg_rpc
