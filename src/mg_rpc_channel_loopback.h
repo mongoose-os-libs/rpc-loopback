@@ -3,14 +3,18 @@
  * All rights reserved
  */
 
-#ifndef CS_COMMON_MG_RPC_MG_RPC_CHANNEL_LOOPBACK_H_
-#define CS_COMMON_MG_RPC_MG_RPC_CHANNEL_LOOPBACK_H_
+#ifndef CS_MOS_LIBS_RPC_LOOPBACK_SRC_MG_RPC_CHANNEL_LOOPBACK_H_
+#define CS_MOS_LIBS_RPC_LOOPBACK_SRC_MG_RPC_CHANNEL_LOOPBACK_H_
 
 #include "mg_rpc_channel.h"
 
 #include "mongoose/mongoose.h"
 
 #define MGOS_RPC_LOOPBACK_ADDR "RPC.LOCAL"
+
+#ifdef __cplusplus
+extern "C" {
+#endif
 
 /*
  * Creates a new loopback channel. Should be called for each incoming loopback
@@ -20,4 +24,8 @@ struct mg_rpc_channel *mg_rpc_channel_loopback(void);
 
 bool mgos_rpc_loopback_init(void);
 
-#endif /* CS_COMMON_MG_RPC_MG_RPC_CHANNEL_LOOPBACK_H_ */
+#ifdef __cplusplus
+}
+#endif
+
+#endif /* CS_MOS_LIBS_RPC_LOOPBACK_SRC_MG_RPC_CHANNEL_LOOPBACK_H_ */
