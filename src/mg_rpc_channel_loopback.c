@@ -36,6 +36,14 @@ static void mg_rpc_channel_loopback_ch_destroy(struct mg_rpc_channel *ch) {
   free(ch);
 }
 
+static bool mg_rpc_channel_loopback_get_authn_info(struct mg_rpc_channel *ch,
+                                                   struct mg_rpc_authn *authn) {
+  (void) ch;
+  (void) authn;
+
+  return false;
+}
+
 static bool mg_rpc_channel_loopback_is_persistent(struct mg_rpc_channel *ch) {
   (void) ch;
   return true;
@@ -108,6 +116,7 @@ struct mg_rpc_channel *mg_rpc_channel_loopback(void) {
   ch->get_type = mg_rpc_channel_loopback_get_type;
   ch->get_info = mg_rpc_channel_loopback_get_info;
   ch->is_persistent = mg_rpc_channel_loopback_is_persistent;
+  ch->get_authn_info = mg_rpc_channel_loopback_get_authn_info;
   return ch;
 }
 
