@@ -1,5 +1,5 @@
 author: mongoose-os
-description: Implements Mongoose OS RPC Loopback channel
+description: Allows to call local RPC services - adds RPC Loopback channel
 type: lib
 version: 1.0
 
