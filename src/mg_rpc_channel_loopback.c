@@ -128,7 +128,7 @@ bool mgos_rpc_loopback_init(void) {
   struct mg_rpc_channel *lch = mg_rpc_channel_loopback();
   if (mgos_rpc_get_global() == NULL) return true;
   mg_rpc_add_channel(mgos_rpc_get_global(), mg_mk_str(MGOS_RPC_LOOPBACK_ADDR),
-                     lch, true /* is_trusted */);
+                     lch);
   lch->ch_connect(lch);
   return true;
 }
