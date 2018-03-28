@@ -8,7 +8,7 @@
 
 #include "mg_rpc_channel.h"
 
-#include "mongoose/mongoose.h"
+#include "mongoose.h"
 
 #define MGOS_RPC_LOOPBACK_ADDR "RPC.LOCAL"
 
