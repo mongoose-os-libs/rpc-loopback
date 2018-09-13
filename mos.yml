@@ -15,5 +15,6 @@ tags:
   - c
   - loopback
   - rpc
+  - docs:rpc:Loopback support
 
 manifest_version: 2017-09-29
