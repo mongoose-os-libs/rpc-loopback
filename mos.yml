@@ -9,7 +9,7 @@ includes:
   - include
 
 libs:
-  - origin: https://github.com/mongoose-os-libs/rpc-common
+  - location: https://github.com/mongoose-os-libs/rpc-common
 
 tags:
   - c
